@@ -15,11 +15,6 @@ Many transportation crash data only provides the milepost infomation instead of 
 * matplotlib
 * [geopandas](https://geopandas.org/getting_started/install.html) 
 
-### Installing
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
 ### Executing program
 
 * download shapefile and crash data (already provided in this repo)
