@@ -3,9 +3,16 @@ import matplotlib.pyplot as plt
 import geopandas as gpd
 
 # load shape file
-shp_path="NJ_Roadway_Network.shp"
+shp_path=r".\shapefile\NJ_Roadway_Network.shp"
 SRI_map = gpd.read_file(shp_path)
 SRI_map = SRI_map.to_crs({'init': 'epsg:4326'})
+
+# load crash data
+crash_data_path = 'acc_19.csv'
+df = pd.read_csv(crash_data_path)
+df['sri_std_rte_identifier'] = df['sri_std_rte_identifier'].astype(str)
+# original data longitude is positive
+df['longitude'] = -df['longitude'].abs()
 
 total = len(df);
 cnt = 0;
@@ -29,6 +36,7 @@ for index, row in df.iterrows():
         df.at[index, 'latitude'] = ip.y
         df.at[index, 'longitude'] = ip.x
         cnt = cnt + 1
+        print(str(cnt) + " of " + str(total) + "done.")
 
 df.to_csv('acc_19_processed.csv',index = False)
 
