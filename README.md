@@ -4,9 +4,9 @@ This repository maps NJDOT crash data from Milepost in Straight Line Diagram to 
 
 ## Description
 
-Many transportation crash data only provides the milepost infomation instead of the lon/lat coordinates, which makes researchers hard to locate the accident without a Linear Refrencing System (LFS). This repository targets at solving this issue by using the [Straight Line Diagram (SLD) shapefile ](https://www.state.nj.us/transportation/refdata/gis/data.shtm) and geopandas to map the milepost in SLD to the WGS coordinates. The following figure shows the results generated from the 2019 crash data. Note those points outside the New Jersey are erros from the raw data, providing wrong coordinates.
+Many transportation crash data only provides the milepost infomation instead of the lon/lat coordinates, which makes researchers hard to locate the accident without a Linear Refrencing System (LFS). This repository targets at solving this issue by using the [Straight Line Diagram (SLD) shapefile ](https://www.state.nj.us/transportation/refdata/gis/data.shtm) and geopandas to map the milepost in SLD to the WGS coordinates. The following figure shows the results generated from the 2019 crash data. Note those points outside the New Jersey are errors from the raw data, which provides no milepost information and wrong coordinates.
 
-![r](results.png)
+![r](final.png)
 ## Getting Started
 
 ### Dependencies

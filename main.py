@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import geopandas as gpd
+from shapely.geometry import Point
 
 # load shape file
 shp_path=r".\shapefile\NJ_Roadway_Network.shp"
@@ -20,13 +21,13 @@ cnt = 0;
 for index, row in df.iterrows():
     sri_cur = row['sri_std_rte_identifier']
     mp_cur = row['milepost']
-    if pd.notna(row['latitude']):#data already has lon lat info
-        print(row['id'] + " already has lon lat info")
-        continue
+    #if pd.notna(row['latitude']):#data already has lon lat info
+    #    print(row['id'] + " already has lon lat info")
+    #    continue
     
     ## SRI is not unique, need to find the row in SRI_map that contains the mp_cur
-    SRI_map_filtered = SRI_map.loc[(SRI_map['SRI'] == df.iloc[0]['sri_std_rte_identifier']) & (SRI_map['MP_START'] < mp_cur) & (SRI_map['MP_END'] > mp_cur)]
-    
+    SRI_map_filtered = SRI_map.loc[(SRI_map['SRI'] == sri_cur) & (SRI_map['MP_START'] < mp_cur) & (SRI_map['MP_END'] > mp_cur)]
+    cnt = cnt + 1
     ## match exists 
     if len(SRI_map_filtered) != 0:
         mp_start = SRI_map_filtered['MP_START']
@@ -35,10 +36,10 @@ for index, row in df.iterrows():
 
         df.at[index, 'latitude'] = ip.y
         df.at[index, 'longitude'] = ip.x
-        cnt = cnt + 1
-        print(str(cnt) + " of " + str(total) + "done.")
+        
+    print(str(cnt) + " of " + str(total) + "done.")  
 
-df.to_csv('acc_19_processed.csv',index = False)
+df.to_csv('acc_19_processed_all.csv',index = False)
 
 geometry = [Point(xy) for xy in zip(df['longitude'], df['latitude'])]
 geometry[:3]
